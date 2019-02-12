@@ -442,6 +442,7 @@
   }
 
   &:before {
+    pointer-events: none;
     content: url("../img/cabinet-icon.png");
     display: block;
     position: absolute;
@@ -456,12 +457,14 @@
 
   &__icon {
     position: absolute;
+    pointer-events: none;
     top: 15px;
     left: 5px;
   }
 
   & a {
     padding-left: 45px;
+
   }
 
   &__btn {
@@ -1466,5 +1469,6 @@
 
   &__social {
     margin: 5px;
+    text-decoration: none;
   }
 }

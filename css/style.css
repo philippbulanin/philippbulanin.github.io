@@ -347,6 +347,7 @@
   .cabinet a {
     padding-left: 40px; }
   .cabinet:before {
+    pointer-events: none;
     content: url("../img/cabinet-icon.png");
     display: block;
     position: absolute;
@@ -358,6 +359,7 @@
   position: relative; }
   .cart__icon {
     position: absolute;
+    pointer-events: none;
     top: 15px;
     left: 5px; }
   .cart a {
@@ -1180,4 +1182,5 @@
     font-weight: 400;
     color: #6b96a5; }
   .footer__social {
-    margin: 5px; }
+    margin: 5px;
+    text-decoration: none; }
