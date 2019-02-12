@@ -178,7 +178,7 @@ sectionRightArrows.forEach(button => {
 
         sliders[id].left -= 1200;
         if (sliders[id].left < minLeft) sliders[id].left = minLeft;
-        event.target.parentNode.parentNode.parentNode.getElementsByClassName("section__products-list")[0].style.left = `${sliders[id].left}px`;
+        event.target.parentNode.parentNode.parentNode.getElementsByClassName("section__products-list")[0].style.transform = `translate(${sliders[id].left}px)`;
 
         indicators.forEach(indicator => {
             indicator.className = "section__indicator";
@@ -213,7 +213,7 @@ sectionLeftArrows.forEach(button => {
 
         sliders[id].left += 1200;
         if (sliders[id].left > maxLeft) sliders[id].left = maxLeft;
-        event.target.parentNode.parentNode.parentNode.getElementsByClassName("section__products-list")[0].style.left = `${sliders[id].left}px`;
+        event.target.parentNode.parentNode.parentNode.getElementsByClassName("section__products-list")[0].style.transform = `translate(${sliders[id].left}px)`;
 
         indicators.forEach(indicator => {
             indicator.className = "section__indicator";
