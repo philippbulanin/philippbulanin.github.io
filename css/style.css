@@ -186,12 +186,14 @@
   margin: 10px auto;
   cursor: pointer;
   outline: none;
+  transition: 0.5s;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   border-radius: 6px; }
   .make-order__button:hover {
-    color: #000; }
+    box-shadow: 0 0 20px black;
+    transition: 0.5s; }
 
 .wrapper {
   margin: 0 auto;
@@ -459,8 +461,7 @@
     border-radius: 100%;
     border: 2px solid #c2c2c2;
     background: transparent;
-    margin: 10px;
-    cursor: pointer; }
+    margin: 10px; }
   .news__element {
     position: absolute;
     opacity: 0;
@@ -987,8 +988,12 @@
   .feedback__button {
     width: 192px;
     height: 48px;
-    padding: 0px;
-    margin: 0; }
+    padding: 0;
+    margin: 0;
+    transition: 0.5s; }
+    .feedback__button:hover {
+      box-shadow: 0 0 20px white;
+      transition: 0.5s; }
     .feedback__button:after {
       display: none; }
   .feedback__info {

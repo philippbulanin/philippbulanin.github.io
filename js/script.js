@@ -22,8 +22,7 @@ const
     buttonMinus = document.querySelectorAll(".minus"),
     buttonSupDel = document.querySelectorAll(".supplements__delete-btn"),
     buttonSupAdd = document.querySelectorAll(".supplements__add-btn"),
-    saucesSelect = document.querySelectorAll(".supplements__select"),
-    supplementsNumber = document.querySelectorAll(".supplements__number");
+    saucesSelect = document.querySelectorAll(".supplements__select");
 
 let cart = [],
     id = 0,
@@ -168,10 +167,11 @@ function createCart() {
 sectionRightArrows.forEach(button => {
     button.onclick = event => {
         let minLeft = 0;
-        let indicators = event.target.parentNode.parentNode.parentNode.querySelectorAll(".section__indicator");
-        let id = event.target.parentNode.parentNode.parentNode.id;
-        let rightButton = event.target.parentNode.parentNode.parentNode.querySelector(".right img");
-        let leftButton = event.target.parentNode.parentNode.parentNode.querySelector(".left img");
+        let slider = event.target.closest(".js-slider");
+        let indicators = slider.querySelectorAll(".section__indicator");
+        let id = slider.id;
+        let rightButton = slider.querySelector(".right img");
+        let leftButton = slider.querySelector(".left img");
 
         if (id == "advertisementNew" || id == "advertisementStock") {
             minLeft = -4800;
@@ -181,7 +181,7 @@ sectionRightArrows.forEach(button => {
 
         sliders[id].left -= 1200;
         if (sliders[id].left < minLeft) sliders[id].left = minLeft;
-        event.target.parentNode.parentNode.parentNode.getElementsByClassName("section__products-list")[0].style.transform = `translate(${sliders[id].left}px)`;
+        slider.querySelector(".section__products-list").style.transform = `translate(${sliders[id].left}px)`;
 
         indicators.forEach(indicator => {
             indicator.className = "section__indicator";
@@ -203,10 +203,11 @@ sectionRightArrows.forEach(button => {
 sectionLeftArrows.forEach(button => {
     button.onclick = event => {
         let maxLeft = 0;
-        let indicators = event.target.parentNode.parentNode.parentNode.querySelectorAll(".section__indicator");
-        let id = event.target.parentNode.parentNode.parentNode.id;
-        let rightButton = event.target.parentNode.parentNode.parentNode.querySelector(".right img");
-        let leftButton = event.target.parentNode.parentNode.parentNode.querySelector(".left img");
+        let slider = event.target.closest(".js-slider");
+        let indicators = slider.querySelectorAll(".section__indicator");
+        let id = slider.id;
+        let rightButton = slider.querySelector(".right img");
+        let leftButton = slider.querySelector(".left img");
 
         if (id == "advertisementNew" || id == "advertisementStock") {
             maxLeft = 0;
@@ -216,7 +217,7 @@ sectionLeftArrows.forEach(button => {
 
         sliders[id].left += 1200;
         if (sliders[id].left > maxLeft) sliders[id].left = maxLeft;
-        event.target.parentNode.parentNode.parentNode.getElementsByClassName("section__products-list")[0].style.transform = `translate(${sliders[id].left}px)`;
+        slider.querySelector(".section__products-list").style.transform = `translate(${sliders[id].left}px)`;
 
         indicators.forEach(indicator => {
             indicator.className = "section__indicator";
@@ -249,54 +250,53 @@ advertisementToggle.forEach(radio => {
 
 buttonPlus.forEach(button => {
     button.onclick = event => {
-        event.target.parentNode.children[1].value = +event.target.parentNode.children[1].value + 1;
-        if (event.target.parentNode.children[1].value > 99) event.target.parentNode.children[1].value = 99;
+        let parent = event.target.parentNode;
+
+        parent.querySelector(".addition__output").value = +parent.querySelector(".addition__output").value + 1;
+        if (parent.querySelector(".addition__output").value > 99) parent.querySelector(".addition__output").value = 99;
     }
 });
 
 buttonMinus.forEach(button => {
     button.onclick = event => {
-        event.target.parentNode.children[1].value = +event.target.parentNode.children[1].value - 1;
-        if (event.target.parentNode.children[1].value < 1) event.target.parentNode.children[1].value = 1;
+        let parent = event.target.parentNode;
+
+        parent.querySelector(".addition__output").value = +parent.querySelector(".addition__output").value - 1;
+        if (parent.querySelector(".addition__output").value < 1) parent.querySelector(".addition__output").value = 1;
     }
 });
 
 buttonSupDel.forEach(button => {
     button.onclick = event => {
-        event.target.parentNode.children[0].innerHTML = 0;
+        event.target.parentNode.querySelector(".supplements__number").innerHTML = 0;
     }
 });
 
 buttonSupAdd.forEach(button => {
     button.onclick = event => {
-        event.target.parentNode.children[0].innerHTML = +event.target.parentNode.children[0].innerHTML + 1;
-        if (event.target.parentNode.children[0].innerHTML > 9) event.target.parentNode.children[0].innerHTML = 9;
-    }
-});
+        let parent = event.target.parentNode;
 
-supplementsNumber.forEach(input => {
-    input.onchange = event => {
-        if (event.target.value < 0) event.target.value = 0;
-        if (event.target.value > 99) event.target.value = 99;
-        if (!(!isNaN(parseFloat(event.target.value)) && isFinite(event.target.value))) event.target.value = 0;
+        parent.querySelector(".supplements__number").innerHTML = +parent.querySelector(".supplements__number").innerHTML + 1;
+        if (parent.querySelector(".supplements__number").innerHTML > 9) parent.querySelector(".supplements__number").innerHTML = 9;
     }
 });
 
 saucesSelect.forEach(select => {
     select.onchange = event => {
-        event.target.parentNode.parentNode.getElementsByClassName("supplements__price_value")[0].value = sauces[event.target.value].price;
+        event.target.closest(".product__supplements").querySelector(".supplements__price_value").value = sauces[event.target.value].price;
     }
 });
 
 toCartButtons.forEach(button => {
     button.onclick = event => {
+        let parent = event.target.parentNode;
         let product = {};
-        let name = event.target.parentNode.getElementsByClassName("product__name")[0].innerHTML;
-        let number = event.target.parentNode.getElementsByClassName("addition__output")[0].value;
-        let price = event.target.parentNode.getElementsByClassName("product__price_value")[0].value;
-        let supplementName = event.target.parentNode.getElementsByClassName("supplements__select")[0] === undefined ? false : event.target.parentNode.getElementsByClassName("supplements__select")[0].value;
-        let supplementNumber = event.target.parentNode.getElementsByClassName("supplements__number")[0] === undefined ? false : event.target.parentNode.getElementsByClassName("supplements__number")[0].value;
-        let supplementPrice = event.target.parentNode.getElementsByClassName("supplements__price_value")[0] === undefined ? false : event.target.parentNode.getElementsByClassName("supplements__price_value")[0].value;
+        let name = parent.querySelector(".product__name").innerHTML;
+        let number = parent.querySelector(".addition__output").value;
+        let price = parent.querySelector(".product__price_value").value;
+        let supplementName = parent.querySelector(".supplements__select") === null ? false : parent.querySelector(".supplements__select").value;
+        let supplementNumber = parent.querySelector(".supplements__number") === null ? false : parent.querySelector(".supplements__number").value;
+        let supplementPrice = parent.querySelector(".supplements__price_value") === null ? false : parent.querySelector(".supplements__price_value").value;
 
         product["name"] = name;
         product["number"] = number;
@@ -349,11 +349,3 @@ newsRightArrow.onclick = () => {
     makeChecked(indicators, nextNewsNumber);
     showElement(news, customIndicators, nextNewsNumber);
 };
-
-customIndicators.forEach(label => {
-    label.onclick = () => {
-        let numb = findChecked(indicators);
-        makeChecked(indicators, numb);
-        showElement(news, customIndicators, numb);
-    }
-});
