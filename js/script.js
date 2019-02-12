@@ -1,4 +1,7 @@
-const indicators = document.querySelectorAll(".news__input"),
+// JS file for public version
+
+const
+    indicators = document.querySelectorAll(".news__input"),
     customIndicators = document.querySelectorAll(".news__indicator"),
     news = document.querySelectorAll(".news__element"),
     newsLeftArrow = document.getElementById("news__left"),
