@@ -214,6 +214,10 @@
     align-items: center;
     justify-content: space-between; }
 
+.logo {
+  display: block;
+  text-decoration: none; }
+
 .address, .email {
   display: flex;
   padding: 20px 0;
